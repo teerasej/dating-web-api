@@ -5,32 +5,38 @@
 
 import express, { Request, Response, NextFunction } from 'express';
 
-const app = express();
-const port = 3000;
 
-app.use(express.json())
+main().catch(error => console.log(error))
 
-app.post('/users', (request: Request, response: Response) => {
-    console.log(request.body)
-    response.status(200).send('ok POST')
-})
+async function main() {
 
-app.get('/users/:email', (request: Request, response: Response) => {
-    console.log(request.params.email)
-    response.status(200).send('ok GET')
-})
+    const app = express();
+    const port = 3000;
 
-app.patch('/users', (request: Request, response: Response) => {
-    console.log(request.body)
-    response.status(200).send('ok PATCH')
-})
+    app.use(express.json())
 
-app.delete('/users', (request: Request, response: Response) => {
-    console.log(request.body.id)
-    response.status(200).send('ok DELETE')
-})
+    app.post('/users', (request: Request, response: Response) => {
+        console.log(request.body)
+        response.status(200).send('ok POST')
+    })
+
+    app.get('/users/:email', (request: Request, response: Response) => {
+        console.log(request.params.email)
+        response.status(200).send('ok GET')
+    })
+
+    app.patch('/users', (request: Request, response: Response) => {
+        console.log(request.body)
+        response.status(200).send('ok PATCH')
+    })
+
+    app.delete('/users', (request: Request, response: Response) => {
+        console.log(request.body.id)
+        response.status(200).send('ok DELETE')
+    })
 
 
-app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}.`);
-});
+    app.listen(port, () => {
+        console.log(`Server running on http://localhost:${port}.`);
+    })
+}

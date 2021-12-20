@@ -22,8 +22,16 @@ async function main() {
     app.post('/users', async (request: Request, response: Response) => {
         console.log(request.body)
 
-        const newUser = new UserModel(request.body)
-        const createdUser = await newUser.save()
+        let createdUser
+        try {
+
+            const newUser = new UserModel(request.body)
+            createdUser = await newUser.save()
+
+        } catch (error) {
+            response.status(500).json(error.message)
+        }
+        
 
         response.status(200).json(createdUser)
     })

@@ -5,6 +5,7 @@
 
 import express, { Request, Response, NextFunction } from 'express';
 import { connect } from 'mongoose'
+import userModel from './schemas/user';
 import UserModel from './schemas/user';
 
 
@@ -27,9 +28,12 @@ async function main() {
         response.status(200).json(createdUser)
     })
 
-    app.get('/users/:email', (request: Request, response: Response) => {
+    app.get('/users/:email', async (request: Request, response: Response) => {
         console.log(request.params.email)
-        response.status(200).send('ok GET')
+
+        const doc = await userModel.findOne({ email: request.params.email })
+
+        response.status(200).json(doc)
     })
 
     app.patch('/users', (request: Request, response: Response) => {

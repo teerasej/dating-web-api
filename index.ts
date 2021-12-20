@@ -15,8 +15,8 @@ app.post('/users', (request: Request, response: Response) => {
     response.status(200).send('ok POST')
 })
 
-app.get('/users/:id', (request: Request, response: Response) => {
-    console.log(request.params.id)
+app.get('/users/:email', (request: Request, response: Response) => {
+    console.log(request.params.email)
     response.status(200).send('ok GET')
 })
 

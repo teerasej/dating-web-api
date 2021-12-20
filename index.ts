@@ -8,20 +8,26 @@ import express, { Request, Response, NextFunction } from 'express';
 const app = express();
 const port = 3000;
 
-app.post('/user', (resquest: Request, response: Response) => {
+app.use(express.json())
 
+app.post('/users', (request: Request, response: Response) => {
+    console.log(request.body)
+    response.status(200).send('ok POST')
 })
 
-app.get('/user/:id', (resquest: Request, response: Response) => {
-    
+app.get('/users/:id', (request: Request, response: Response) => {
+    console.log(request.params.id)
+    response.status(200).send('ok GET')
 })
 
-app.patch('/user/:id', (resquest: Request, response: Response) => {
-    
+app.patch('/users', (request: Request, response: Response) => {
+    console.log(request.body)
+    response.status(200).send('ok PATCH')
 })
 
-app.delete('/user/:id', (resquest: Request, response: Response) => {
-    
+app.delete('/users', (request: Request, response: Response) => {
+    console.log(request.body.id)
+    response.status(200).send('ok DELETE')
 })
 
 

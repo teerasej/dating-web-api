@@ -5,6 +5,7 @@
 
 import express, { Request, Response, NextFunction } from 'express';
 import { connect } from 'mongoose'
+import UserModel from './schemas/user';
 
 
 main().catch(error => console.log(error))
@@ -17,9 +18,13 @@ async function main() {
 
     app.use(express.json())
 
-    app.post('/users', (request: Request, response: Response) => {
+    app.post('/users', async (request: Request, response: Response) => {
         console.log(request.body)
-        response.status(200).send('ok POST')
+
+        const newUser = new UserModel(request.body)
+        const createdUser = await newUser.save()
+
+        response.status(200).json(createdUser)
     })
 
     app.get('/users/:email', (request: Request, response: Response) => {

@@ -4,11 +4,13 @@
 // https://opensource.org/licenses/MIT
 
 import express, { Request, Response, NextFunction } from 'express';
+import { connect } from 'mongoose'
 
 
 main().catch(error => console.log(error))
 
 async function main() {
+    await connect('mongodb://localhost:27017/dating_app')
 
     const app = express();
     const port = 3000;

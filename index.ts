@@ -41,9 +41,16 @@ async function main() {
         
     })
 
-    app.patch('/users', (request: Request, response: Response) => {
+    app.patch('/users', async (request: Request, response: Response) => {
         console.log(request.body)
+
+        await userModel.updateOne({ email: request.body.email }, request.body)
+
         response.status(200).send('ok PATCH')
+
+        // ใช้ .findOneAndUpdate แทน ถ้าต้องการ doc กลับมาใช้งานจาก database ด้วย
+        // const updatedDoc = await userModel.findOneAndUpdate({ email: request.body.email }, request.body)
+        // response.status(200).send(updatedDoc)
     })
 
     app.delete('/users', (request: Request, response: Response) => {

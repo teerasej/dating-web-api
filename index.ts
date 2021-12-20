@@ -53,8 +53,11 @@ async function main() {
         // response.status(200).send(updatedDoc)
     })
 
-    app.delete('/users', (request: Request, response: Response) => {
+    app.delete('/users', async (request: Request, response: Response) => {
         console.log(request.body.id)
+
+        await userModel.findByIdAndRemove(request.body.id)
+
         response.status(200).send('ok DELETE')
     })
 

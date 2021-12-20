@@ -3,8 +3,11 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
-main().catch(error => console.log(error))
+import express from 'express';
 
-async function main() {
-    console.log('Hello World')
-}
+const app = express();
+const port = 3000;
+
+app.listen(port, () => {
+  console.log(`Server running on http://localhost:${port}.`);
+});

@@ -33,7 +33,12 @@ async function main() {
 
         const doc = await userModel.findOne({ email: request.params.email })
 
-        response.status(200).json(doc)
+        if(doc) {
+            response.status(200).json(doc)
+        } else {
+            response.status(404).send('user not found')
+        }
+        
     })
 
     app.patch('/users', (request: Request, response: Response) => {
